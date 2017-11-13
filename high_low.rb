@@ -7,7 +7,7 @@ require_relative 'high_low_payout_tables'
 class HighLow
   attr_accessor :player, :deck
   def initialize(player)
-    @bet = 0
+    @bet = 0.0
     @deck = nil
     @player = player
     puts "Welcome to High/Low, #{player.name}!"
@@ -23,6 +23,7 @@ class HighLow
     when 1
       puts "Input bet amount"
       @bet = gets.to_f
+      @player.wallet.withdraw(@bet)
       play_game
     when 2
     else
@@ -63,18 +64,39 @@ class HighLow
     end
   end
 
+  def get_multiplier(rank, choice)
+    rank = rank.to_s
+    case choice
+      when 1
+        Higher_payouts[rank]
+      when 2
+        Lower_payouts[rank]
+    end
+  end
+
   def play_game
+    puts "HI"
     @deck = Deck.new
     @deck.shuffle_cards
     cards = []
-    cards << @deck.cards.delete(@deck.choose_card)
-    if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
-      play_game
-    end
 
+    loop do
+      cards << @deck.cards.delete(@deck.choose_card)
+      if cards.last.rank[:name] != 'King' && cards.last.rank[:name] != 'Ace'
+        break
+      end
+    end
+    #cards << @deck.cards.delete(@deck.choose_card)
+    #if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
+    #  play_game
+    #end
+
+
+    puts "boo"
     puts "The first card is a(n) #{cards.last.rank[:name]}."
 
     while true
+      payout_multiplier = 0
       win = false
       choice = higher_or_lower
 
@@ -88,6 +110,8 @@ class HighLow
         when 1
           if cards.last.rank[:rank] > cards[cards.length - 2].rank[:rank]
             puts "You win!"
+            payout_multiplier = get_multiplier(cards[cards.length - 2].rank[:rank], 1)
+            @bet = (@bet * payout_multiplier)
             win = true
           else
             puts "Too bad."
@@ -95,6 +119,8 @@ class HighLow
         when 2
           if cards.last.rank[:rank] < cards[cards.length - 2].rank[:rank]
             puts "You win!"
+            payout_multiplier = get_multiplier(cards[cards.length - 2].rank[:rank], 2)
+            @bet += (@bet * payout_multiplier)
             win = true
           else
             puts "Too bad."
@@ -116,10 +142,15 @@ class HighLow
             end
             redo
           when 2
+            @player.wallet.deposit(@bet)
+            puts "You won $#{@bet}!"
             initial_menu
           when 3
+            @player.wallet.deposit(@bet)
+            puts "You won $#{@bet}!"
             puts "Come again!"
         end
+        break
       else
         puts "Play again? 1) Yes 2) No"
         choice = gets.to_i
@@ -131,11 +162,14 @@ class HighLow
             puts "Come again!"
           else
         end
+        break
       end
       break
     end
   end
 end
 
-#player = Player.new
-#HighLow.new(player)
+player = Player.new
+HighLow.new(player)
+
+puts player.wallet.amount
