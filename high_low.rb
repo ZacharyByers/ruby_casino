@@ -1,4 +1,5 @@
 require 'pry'
+require 'colorize'
 
 require_relative 'player'
 require_relative 'deck'
@@ -49,7 +50,7 @@ class HighLow
   end
 
   def higher_or_lower
-    puts "Will the next card be:"
+    puts "Will the next card be:".yellow
     puts "1) Higher"
     puts "2) Lower"
 
@@ -85,37 +86,41 @@ class HighLow
         break
       end
     end
-    puts "The first card is a(n) #{cards.last.rank[:name]}."
+    puts "The first card is a(n) #{cards.last.rank[:name]}.".yellow
 
     while true
       payout_multiplier = 0
       win = false
       choice = higher_or_lower
 
-      puts "Well, let's see!"
+      puts "Well, let's see!".cyan
 
       cards << @deck.cards.delete(@deck.choose_card)
 
-      puts "It's a #{cards.last.rank[:name]}!"
+      puts "It's a #{cards.last.rank[:name]}!".yellow
 
       case choice
         when 1
           if cards.last.rank[:rank] > cards[cards.length - 2].rank[:rank]
-            puts "You win!"
+            `say hooray`
+            puts "You win!".green
             payout_multiplier = get_multiplier(cards[cards.length - 2].rank[:rank], 1)
             @bet = (@bet * payout_multiplier)
             win = true
           else
-            puts "Too bad."
+            `say dagnabbit`
+            puts "Too bad.".red
           end
         when 2
           if cards.last.rank[:rank] < cards[cards.length - 2].rank[:rank]
+            `say hooray`
             puts "You win!"
             payout_multiplier = get_multiplier(cards[cards.length - 2].rank[:rank], 2)
             @bet += (@bet * payout_multiplier)
             win = true
           else
-            puts "Too bad."
+            `say dagnabbit`.green
+            puts "Too bad.".red
           end
       end
 
@@ -129,7 +134,7 @@ class HighLow
         case choice
           when 1
             if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
-              puts "Oh, we're at an extreme, gotta reshuffle!"
+              puts "Oh, we're at an extreme, gotta reshuffle!".pink
               play_game
             end
             redo
@@ -151,7 +156,7 @@ class HighLow
           when 1
             initial_menu
           when 2
-            puts "Come again!"
+            puts "Come again!".yellow
           else
         end
         break
