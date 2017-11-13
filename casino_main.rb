@@ -17,6 +17,7 @@ class Casino
   end
 
   def menu
+    puts "Choose a game!"
     @options.each_with_index { |opt, i| puts "#{i + 1}) #{opt}" }
     choice = gets.to_i - 1
     case choice

@@ -32,6 +32,16 @@ class HighLow
     puts "1) Continue"
     puts "2) Collect winnings, start new game"
     puts "3) Collect winnings and quit"
+
+    choice = gets.to_i
+
+    case choice
+    when 1, 2, 3
+      choice
+    else
+      puts "Invalid input."
+      during_menu
+    end
   end
 
   def higher_or_lower
@@ -54,19 +64,62 @@ class HighLow
     @deck.shuffle_cards
     cards = []
     cards << @deck.cards.delete(@deck.choose_card)
-    play_game if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
+    if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
+      play_game
+    end
 
-    puts "The first card is a(n) #{cards.last.rank}."
+    puts "The first card is a(n) #{cards.last.rank[:name]}."
 
     while true
+      win = false
       choice = higher_or_lower
 
       puts "Well, let's see!"
 
       cards << @deck.cards.delete(@deck.choose_card)
 
-      break
+      puts "It's a #{cards.last.rank[:name]}!"
 
+      case choice
+      when 1
+        if cards.last.rank[:rank] > cards[cards.length - 2].rank[:rank]
+          puts "You win!"
+          win = true
+        else
+          puts "Too bad."
+        end
+      when 2
+        if cards.last.rank[:rank] < cards[cards.length - 2].rank[:rank]
+          puts "You win!"
+          win = true
+        else
+          puts "Too bad."
+        end
+      end
+
+      if win
+        choice = during_menu
+        case choice
+          when 1
+            redo
+          when 2
+            initial_menu
+          when 3
+            puts "Come again!"
+        end
+      else
+        puts "Play again? 1) Yes 2) No"
+        choice = gets.to_i
+
+        case choice
+          when 1
+            initial_menu
+          when 2
+            puts "Come again!"
+          else
+        end
+      end
+      break
     end
   end
 end
