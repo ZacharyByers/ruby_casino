@@ -1,4 +1,5 @@
 class Player
+  attr_accessor :name, :age, :wallet
   MIN_AGE = 21
   def initialize
     puts "What is your name, player?"
