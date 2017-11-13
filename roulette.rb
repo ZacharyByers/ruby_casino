@@ -19,26 +19,39 @@ class Roulette
 		puts "Would you like to: "
 		puts "1) Bet on an even or odd number"
 		puts "2) Bet on a specific number"
-			@num1 = gets.to_f
-			oddoreven
+			num1 = gets.to_f
+			case num1
+			when num1 == 1
+				oddoreven
+			when num1 == 2
+				specificNumber
+			end
+		end
+
+		def specificNumber
+			puts "What number would you like to select (1 - 36)"
+			spec = gets.to_f
+			colorboi
 		end
 
 		def oddoreven
-		when @num1 = 1
-			puts "Odd or even?"
-			@oore = gets.strip.to_s
-		oddoreventoo
+					puts "Odd or even?"
+					@oore = gets.strip.to_s
 		end
 
 		def oddoreventoo
-		when @oore = "odd"
-			#take array into odd
-		when @oore = "even"
-			#take array into even
-		else
-			puts "Invalid input"
-			roulettegame
+			case oore
+				when oore = "odd"
+					@roulette/2 % 1
+				when oore = "even"
+					@roulette/2 % 0
+				else
+					puts "Invalid input"
+					roulettegame
 		end
+
+		def colorboi
+			
 
 		def roll
 			puts "Table spinning..." #time this so that it goes right into
