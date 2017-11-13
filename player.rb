@@ -26,7 +26,7 @@ class Player
 
   def age_verification
     if @age < MIN_AGE
-      `say skedaddle kid`
+      `say skeedaddle kid`
       exit 0
     else
       running_tab
