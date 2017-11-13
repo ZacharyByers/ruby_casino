@@ -7,7 +7,21 @@ class Deck
  # Gets called when you call the new method to create an instance
  # deck = Deck.new
  def initialize
-   @ranks = %w(A 2 3 4 5 6 7 8 9 10 J Q K)
+   @ranks = [
+     {name: 'Ace', rank: 1},
+     {name: 'Two', rank: 2},
+     {name: 'Three', rank: 3},
+     {name: 'Four', rank: 4},
+     {name: 'Five', rank: 5},
+     {name: 'Six', rank: 6},
+     {name: 'Seven', rank: 7},
+     {name: 'Eight', rank: 8},
+     {name: 'Nine', rank: 9},
+     {name: 'Ten', rank: 10},
+     {name: 'Jack', rank: 11},
+     {name: 'Queen', rank: 12},
+     {name: 'King', rank: 13}
+   ]
    @suits = %w(Spades Diamonds Clubs Hearts)
    @cards = []
    generate_deck
