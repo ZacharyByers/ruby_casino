@@ -168,8 +168,3 @@ class HighLow
     end
   end
 end
-
-player = Player.new
-HighLow.new(player)
-
-puts player.wallet.amount
