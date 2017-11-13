@@ -1,3 +1,5 @@
+require_relative 'card'
+
 class Deck
  # Getter and Setter methods for rank, suit and color
  attr_accessor :cards
@@ -12,7 +14,7 @@ class Deck
  end
 
  def shuffle_cards
-  @cards.shuffle
+  @cards.shuffle!
  end
 
  def generate_deck
@@ -23,5 +25,9 @@ class Deck
        @cards << Card.new(@ranks[i], suit, color)
      end
    end
+ end
+
+ def choose_card
+   @cards.sample
  end
 end
