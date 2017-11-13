@@ -8,10 +8,10 @@ require_relative 'player'
 require_relative 'craps'
 
 class Casino
-  attr_accessor :player
+  attr_accessor :player, :running_tab
 
   def initialize
-    @options = ['High/Low', 'Craps', 'Exit']
+    @options = ['High/Low', 'Craps', 'ATM', 'View Wallet', 'Exit']
     puts "Welcome to the Ruby Casino!".green
     @player = Player.new
     menu
@@ -27,7 +27,11 @@ class Casino
       when 1
         Craps.new(@player)
       when 2
-        `say toodle pip old bean`
+        atm
+      when 3
+        puts "You have $#{player.ledger}"
+        puts "k bye"
+      when 4
         exit 0
       else
         puts "Invalid choice"
@@ -37,5 +41,19 @@ class Casino
   end
 end
 
+def atm
+  puts "How much money do you want to withdraw?".light_blue
+    withdrawl = gets.strip.to_i
+    if withdrawl > 500
+      puts "You can only take out $500 at a time.".red
+      atm
+    else
+      player.ledger = player.ledger + withdrawl
+      puts "Please wait while we process your transaction..."
+      puts "Your transaction was successfull.".yellow
+      puts "You now have $#{player.ledger}".green
+      menu
+  end
+end
 
 Casino.new
