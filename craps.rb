@@ -43,22 +43,51 @@ class Craps
       when @diesum == 7 || @diesum == 11
           puts "You win!".green
           @player.wallet.deposit(@bet1)
-          puts @amount
+          puts "#{@amount}"
       when @diesum == 2 || @diesum == 3 || @diesum == 12
         puts "You lose.".red
         @player.wallet.withdraw(@bet1)
-        puts @amount
+        puts "#{@amount}"
       else
         puts "Bonus Round!".yellow
-        b_round
+        @total1 = @diesum
+        odds_bet
     end
   end
 
-  def b_round
-    
-  end
+  def odds_bet
+    puts "Would you like to make an odds bet? y/n"
+    @answer = gets.strip.to_s
+      case
+        when @answer == 'y'
+          puts "How much would you like to bet on your odds bet?"
+          bet2 = gets.to_i
+          @bet1 += bet2
+          b_round
+        when @answer =='n'
+          b_round
+        else
+          puts "Invalid Input, please select 'y' or 'n'"
+      end
+    end
 
-end
+    def b_round
+      @dice.roll
+      @dice.show_dice
+      puts
+      @diesum2 = @dice.show_sum
+      case
+        when @diesum2 == @total1
+            puts "You Win!".green
+            @player.wallet.deposit(@bet1)
+        when @diesum2 == 7
+          puts "You Lose.".red
+        else
+          puts "Roll Again!".yellow
+          b_round
+      end
+    end
+  end
 
 player = Player.new
 
