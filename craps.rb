@@ -46,8 +46,8 @@ class Craps
     case
       when @diesum == 7 || @diesum == 11
           puts "You win!".green
-          @player.wallet.deposit(@bet1)
-          puts "#{@wallet}"
+          player.ledger.deposit(@bet1)
+          puts "$#{player.ledger}"
           addict
       when @diesum == 2 || @diesum == 3 || @diesum == 12
         puts "You lose.".red
