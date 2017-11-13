@@ -9,9 +9,7 @@ require_relative 'player.rb'
 class Casino
   def initialize
     puts "Welcome to the Ruby Casino!".green
-    
-    #create a new player instance, probably put the name
-    #in the Player initialize
+    @player = Player.new
   end
 end
 
