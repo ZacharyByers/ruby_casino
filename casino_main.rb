@@ -27,7 +27,7 @@ class Casino
       when 1
         Craps.new(@player)
       when 2
-        puts "k bye"
+        `say toodle pip old bean`
         exit 0
       else
         puts "Invalid choice"

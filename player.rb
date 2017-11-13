@@ -17,7 +17,7 @@ class Player
 
   def age_verification
     if @age < MIN_AGE
-      puts "Skedaddle, kid."
+      `say skedaddle kid`
       exit 0
     end
   end
