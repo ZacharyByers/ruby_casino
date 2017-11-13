@@ -1,27 +1,57 @@
+require_relative 'wallet'
+require_relative 'player'
+require_relative 'rollingdice'
+require 'colorize'
+require 'pry'
+
 class Craps
-  attr_accessor :amount
+  attr_accessor :amount, :player, :rollingdice
 
 
   def initialize(player)
     @player = player
+    @dice = Dice.new
     puts "Welcome to Craps, #{player.name}"
+    opening
+  end
+
+  def opening
+    puts "1) Place your bet."
+    puts "2) Quit"
     comeout
   end
 
   def comeout
-    puts "Please place your bet on the pass-line."
-    bet = gets.to_i
-    d = Dice.new
-# d.show_dice
-# puts
-# d.show_sum
-
+    choice = gets.to_i
+    case choice
+      when 1
+        puts "Please declare the amount you wish to bet."
+        @bet1 = gets.to_f
+        roll_1
+      when 2
+        exit
+        menu
+    end
   end
 
-
-
-
-
+  def roll_1
+    @dice.roll
+    @dice.show_dice
+    puts
+    @diesum = @dice.show_sum
+    case
+      when @diesum == 7 || @diesum == 11
+          puts "You win!".green
+          @player.wallet.deposit(@bet1)
+      when @diesum == 2 || @diesum == 3 || @diesum == 12
+        puts "You lose.".red
+        @player.wallet.withdraw(@bet1)
+      else
+        puts "Bonus Round!".yellow
+    end
+  end
 end
 
-Craps.new
+player = Player.new
+
+Craps.new(player)
