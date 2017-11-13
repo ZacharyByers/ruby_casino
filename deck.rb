@@ -45,7 +45,3 @@ class Deck
    @cards.sample
  end
 end
- 
-
-deck.new
-puts Deck
