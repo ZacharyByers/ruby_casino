@@ -11,7 +11,7 @@ class Craps
   def initialize(player)
     @player = player
     @dice = Dice.new
-    puts "Welcome to Craps, #{player.name}"
+    puts "Welcome to Craps, #{player.name}!".blue
     opening
   end
 
@@ -43,13 +43,21 @@ class Craps
       when @diesum == 7 || @diesum == 11
           puts "You win!".green
           @player.wallet.deposit(@bet1)
+          puts @amount
       when @diesum == 2 || @diesum == 3 || @diesum == 12
         puts "You lose.".red
         @player.wallet.withdraw(@bet1)
+        puts @amount
       else
         puts "Bonus Round!".yellow
+        b_round
     end
   end
+
+  def b_round
+    
+  end
+
 end
 
 player = Player.new
