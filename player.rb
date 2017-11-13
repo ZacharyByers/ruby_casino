@@ -1,3 +1,5 @@
+require_relative 'wallet'
+
 class Player
   attr_accessor :name, :age, :wallet
   MIN_AGE = 21
