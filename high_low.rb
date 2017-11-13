@@ -2,12 +2,13 @@ require 'pry'
 
 require_relative 'player'
 require_relative 'deck'
+require_relative 'high_low_payout_tables'
 
 class HighLow
   attr_accessor :player, :deck
   def initialize(player)
     @bet = 0
-    @deck = Deck.new
+    @deck = nil
     @player = player
     puts "Welcome to High/Low, #{player.name}!"
     initial_menu
@@ -25,6 +26,8 @@ class HighLow
       play_game
     when 2
     else
+      puts "Invalid input"
+      initial_menu
     end
   end
 
@@ -61,6 +64,7 @@ class HighLow
   end
 
   def play_game
+    @deck = Deck.new
     @deck.shuffle_cards
     cards = []
     cards << @deck.cards.delete(@deck.choose_card)
@@ -81,26 +85,35 @@ class HighLow
       puts "It's a #{cards.last.rank[:name]}!"
 
       case choice
-      when 1
-        if cards.last.rank[:rank] > cards[cards.length - 2].rank[:rank]
-          puts "You win!"
-          win = true
-        else
-          puts "Too bad."
-        end
-      when 2
-        if cards.last.rank[:rank] < cards[cards.length - 2].rank[:rank]
-          puts "You win!"
-          win = true
-        else
-          puts "Too bad."
-        end
+        when 1
+          if cards.last.rank[:rank] > cards[cards.length - 2].rank[:rank]
+            puts "You win!"
+            win = true
+          else
+            puts "Too bad."
+          end
+        when 2
+          if cards.last.rank[:rank] < cards[cards.length - 2].rank[:rank]
+            puts "You win!"
+            win = true
+          else
+            puts "Too bad."
+          end
+      end
+
+      if cards.last.rank[:rank] == cards[cards.length - 2].rank[:rank]
+        puts "Even money."
+        win = true
       end
 
       if win
         choice = during_menu
         case choice
           when 1
+            if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
+              puts "Oh, we're at an extreme, gotta reshuffle!"
+              play_game
+            end
             redo
           when 2
             initial_menu
