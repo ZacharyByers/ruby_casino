@@ -1,7 +1,7 @@
 class HighLow
-  attr_accessor :player, :casino
-  def initialize(player, casino)
+  attr_accessor :player
+  def initialize(player)
     @player = player
-    @casino = casino
+    puts "Welcome to High/Low, #{player.name}!"
   end
 end
