@@ -6,7 +6,12 @@ require 'pry'
 
 class Craps
   attr_accessor :amount, :player, :rollingdice
-
+  #
+  # GOOD_QUOTES = [ " 'It's not really gambling if you never lose. --Jennifer Anniston' ",
+  #  " 'Diligence is the mother of good luck. --Benjamin Franklin' ", "To the soldier,
+  #  luck is merely another word for skill.--Patrick MacGill' ",  ]
+  # BAD_QUOTES = [" 'Shallow men believe in luck. Strong men believe in cause and effect.--Ralph Waldo Emerson' ",
+  #   ""]
 
   def initialize(player)
     @player = player
@@ -16,8 +21,8 @@ class Craps
   end
 
   def opening
-    puts "1) Place your bet."
-    puts "2) Quit"
+    puts "1) Start rollin' the dice."
+    puts "2) Exit to Casino"
     comeout
   end
 
@@ -29,8 +34,7 @@ class Craps
         @bet1 = gets.to_f
         roll_1
       when 2
-        exit
-        menu
+
     end
   end
 
@@ -43,11 +47,13 @@ class Craps
       when @diesum == 7 || @diesum == 11
           puts "You win!".green
           @player.wallet.deposit(@bet1)
-          puts "#{@amount}"
+          puts "#{@wallet}"
+          addict
       when @diesum == 2 || @diesum == 3 || @diesum == 12
         puts "You lose.".red
         @player.wallet.withdraw(@bet1)
-        puts "#{@amount}"
+        puts "#{@wallet}"
+        addict
       else
         puts "Bonus Round!".yellow
         @total1 = @diesum
@@ -55,8 +61,22 @@ class Craps
     end
   end
 
+  def addict
+    puts "Would you like to play again? Y/N"
+    choice = gets.strip.downcase
+    if choice == "y"
+      comeout
+    elsif choice == "n"
+
+    else
+      puts "Didn't quite getcha there, #{player.name}. Press 'Y' or 'N'"
+      addict
+    end
+  end
+
+
   def odds_bet
-    puts "Would you like to make an odds bet? y/n"
+    puts "Would you like to make an odds bet? Y/N"
     @answer = gets.strip.to_s
       case
         when @answer == 'y'
@@ -74,14 +94,15 @@ class Craps
     def b_round
       @dice.roll
       @dice.show_dice
-      puts
-      @diesum2 = @dice.show_sum
+      puts @diesum2 = @dice.show_sum
       case
         when @diesum2 == @total1
             puts "You Win!".green
             @player.wallet.deposit(@bet1)
+            addict
         when @diesum2 == 7
           puts "You Lose.".red
+          addict
         else
           puts "Roll Again!".yellow
           b_round
@@ -89,6 +110,6 @@ class Craps
     end
   end
 
-player = Player.new
+#player = Player.new
 
-Craps.new(player)
+#Craps.new(player)

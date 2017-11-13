@@ -9,11 +9,11 @@ class Dice
  end
 
  def show_dice
-   print "Die1: ", @die1, " Die2: ", @die2
+   print "Die1: ", @die1, " Die2:  ", @die2
  end
 
  def show_sum
-   print "Sum of dice is ", @die1 + @die2, ".\n"
+   print "Sum of dice is  ", @die1 + @die2, ".\n"
    diesum = @die1 + @die2
    return diesum
   end
