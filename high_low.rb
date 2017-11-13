@@ -75,7 +75,6 @@ class HighLow
   end
 
   def play_game
-    puts "HI"
     @deck = Deck.new
     @deck.shuffle_cards
     cards = []
@@ -86,13 +85,6 @@ class HighLow
         break
       end
     end
-    #cards << @deck.cards.delete(@deck.choose_card)
-    #if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
-    #  play_game
-    #end
-
-
-    puts "boo"
     puts "The first card is a(n) #{cards.last.rank[:name]}."
 
     while true

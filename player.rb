@@ -1,10 +1,11 @@
 require_relative 'wallet'
 
 class Player
-  attr_accessor :name, :age, :wallet, :ledger
+  attr_accessor :name, :age, :wallet
   MIN_AGE = 21
 
   def initialize
+    @wallet = Wallet.new
     puts "What is your name, player?".yellow
       @name = gets.strip
     puts "What is your age?".yellow
@@ -14,12 +15,12 @@ class Player
 
   def running_tab
     puts "How much money are you playing with, #{@name}?".yellow
-      @ledger = gets.to_f
-      if @ledger == 0
+      wallet.amount = gets.to_f
+      if wallet.amount == 0
         puts "Gonna need some pesos to play at this joint, hombre.".red
         running_tab
       else
-        puts "You have $#{@ledger}! Let's play!".green
+        puts "You have $#{wallet.amount}! Let's play!".green
     end
   end
 

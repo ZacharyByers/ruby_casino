@@ -29,9 +29,9 @@ class Casino
       when 2
         atm
       when 3
-        puts "You have $#{player.ledger}"
-        puts "k bye"
+        puts "You have $#{player.wallet.amount}"
       when 4
+        `say toodle pip old bean`
         exit 0
       else
         puts "Invalid choice"
@@ -48,10 +48,10 @@ def atm
       puts "You can only take out $500 at a time.".red
       atm
     else
-      player.ledger = player.ledger + withdrawl
+      player.wallet.amount = player.wallet.amount + withdrawl
       puts "Please wait while we process your transaction..."
       puts "Your transaction was successfull.".yellow
-      puts "You now have $#{player.ledger}".green
+      puts "You now have $#{player.wallet.amount}".green
       menu
   end
 end
