@@ -102,6 +102,7 @@ class Craps
             addict
         when @diesum2 == 7
           puts "You Lose.".red
+          @player.wallet.withdraw(@bet1)
           addict
         else
           puts "Roll Again!".yellow
