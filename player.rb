@@ -5,8 +5,8 @@ class Player
   MIN_AGE = 21
 
   def initialize
-    @wallet = Wallet.new
-    puts "What is your name, player?".yellow
+      @wallet = Wallet.new
+      puts "What is your name, player?".yellow
       @name = gets.strip
     puts "What is your age?".yellow
       @age = gets.to_i
