@@ -23,6 +23,7 @@ class Roulette
 		@color = ["red", "black"]
 		@oddEven = nil
 		@redorblack = nil
+		@colorboibet = 0
 		roulettegame
 	end
 
@@ -131,7 +132,7 @@ class Roulette
 					"!!!You got something right!!!"
 					@player.wallet.deposit(@colorboibet)
 				else
-					`say Uh oh spagghetti-os`
+					`say Uh oh spaghettios`
 					puts "couldn't even get the color!"
 					@player.wallet.withdraw(@colorboibet)
 				end
