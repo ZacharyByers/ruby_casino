@@ -41,12 +41,12 @@ class Craps
       when @diesum == 7 || @diesum == 11
           puts "You win!".green
           player.wallet.deposit(@bet1)
-          puts "$#{player.wallet.amount}"
+          puts "$#{@player.wallet.amount}"
           addict
       when @diesum == 2 || @diesum == 3 || @diesum == 12
         puts "You lose.".red
         @player.wallet.withdraw(@bet1)
-        puts "#{@wallet.amount}"
+        puts "#{@player.wallet.amount}"
         addict
       else
         puts "Bonus Round!".yellow
@@ -59,7 +59,7 @@ class Craps
     puts "Would you like to play again? Y/N"
     choice = gets.strip.downcase
     if choice == "y"
-      comeout
+      opening
     elsif choice == "n"
 
     else
