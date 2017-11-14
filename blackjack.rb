@@ -40,8 +40,9 @@ class Blackjack
     score = check_score @dealerhand
     if score <= 16
       hit
-    elsif hand >= 22
-      puts dealer bust
+    elsif score >= 22
+      puts "dealer bust"
+      endgame(1)
     else
     end
   end
@@ -52,7 +53,7 @@ class Blackjack
         name = card.rank[:name]
       if rank == 1
         puts " #{name} #{rank}"
-    
+
       elsif rank >=10
         rank = 10
         puts " #{name} #{rank}"
@@ -76,9 +77,9 @@ class Blackjack
       @playerhand.push hit
       score = check_score @playerhand
       if score >= 22
-        endgame "dealer"
+        endgame
       elsif score == 21
-        endgame "player"
+        endgame(1)
       end
     end
     #if hit add card to deck
@@ -86,6 +87,18 @@ class Blackjack
     #check new score to check if bust or win
     #if stay end turn
 
+  end
+
+  def endgame(result = 0)
+    @playing = false
+    case result
+      when 0
+        `say dagnabbit`
+        puts "You lose.".red
+      when 1
+        `say hooray`
+        puts "You win!".green
+    end
   end
 
   def initial_menu
@@ -130,4 +143,3 @@ class Blackjack
   end
 
 end
-Blackjack.new Player.new
