@@ -18,6 +18,7 @@ class Roulette
 		@player = first
 		# if they lose do this.. @player.wallet.withdraw
 		# if they win do this.. @player.wallet.deposit
+		@bet = 10.0
 		@roulette = (1..36).to_a
 		@color = ["red", "black"] 
 		@oddEven = nil
@@ -78,8 +79,8 @@ class Roulette
 
 		def colorboitoo
 			puts "What color (red or black)"
-				colr = gets.strip
-			case colr
+				@colr = gets.strip
+			case @colr
 			when "red"
 				@redorblack = 'red'
 			when "black"
@@ -94,7 +95,7 @@ class Roulette
 		def colorbet
 			puts "How much would you like to bet on color?"
 			puts "$2-5"
-			colorboibet = gets.to_f
+			@colorboibet = gets.to_f
 			roll
 		end
 			
@@ -112,7 +113,26 @@ class Roulette
 				#compare the randomized answer to the bet placed
 				#add or take amount from wallet in main bet
 				#add or take amount from wallet in color bet (if they placed a bet there)
-				
+				if num_result == @spec
+					'say congradimication you won'
+					@player.wallet.deposit(@bet) 
+				else 
+					puts "Oopsie poopsies, you silly loser!"
+					@player.wallet.withdraw(@bet)
+
+				  #win
+				#elsif 
+				  # check if num is even or odd check user input for even or odd see if they match
+				#elsif
+				   #col_result && @redorblack
+				end
+				if col_result == @colr
+					"!!!You got something right!!!"
+					@player.wallet.deposit(@colorboibet)
+				else
+					puts "Uh oh spagghetti-os, couldn't even get the color!"
+					@player.wallet.withdraw(@colorboibet)
+				end
 
 
 		end
