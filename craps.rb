@@ -6,12 +6,6 @@ require 'pry'
 
 class Craps
   attr_accessor :amount, :player, :rollingdice
-  #
-  # GOOD_QUOTES = [ " 'It's not really gambling if you never lose. --Jennifer Anniston' ",
-  #  " 'Diligence is the mother of good luck. --Benjamin Franklin' ", "To the soldier,
-  #  luck is merely another word for skill.--Patrick MacGill' ",  ]
-  # BAD_QUOTES = [" 'Shallow men believe in luck. Strong men believe in cause and effect.--Ralph Waldo Emerson' ",
-  #   ""]
 
   def initialize(player)
     @player = player
@@ -109,4 +103,4 @@ class Craps
           b_round
       end
     end
-  end 
+  end
