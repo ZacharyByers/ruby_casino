@@ -24,7 +24,7 @@ class Craps
     choice = gets.to_i
     case choice
       when 1
-        puts "Please declare the amount you wish to bet."
+        puts "How much we bettin' today?".yellow
         @bet1 = gets.to_f
         roll_1
       when 2
