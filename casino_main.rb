@@ -38,7 +38,7 @@ class Casino
       when 4
         atm
       when 5
-        puts "You have $#{player.wallet.amount}"
+        puts "You have $#{player.wallet.amount}".green
       when 6
         `say toodle pip old bean`
         exit 0
