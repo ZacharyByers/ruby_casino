@@ -134,7 +134,7 @@ class HighLow
         case choice
           when 1
             if cards.last.rank[:name] == 'King' || cards.last.rank[:name] == 'Ace'
-              puts "Oh, we're at an extreme, gotta reshuffle!".pink
+              puts "Oh, we're at an extreme, gotta reshuffle!".yellow
               play_game
             end
             redo
