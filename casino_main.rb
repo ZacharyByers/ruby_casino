@@ -1,6 +1,5 @@
 require 'colorize'
 
-require_relative 'slots'
 require_relative 'high_low'
 require_relative 'wallet'
 require_relative 'player'
