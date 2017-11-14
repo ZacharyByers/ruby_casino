@@ -18,7 +18,7 @@ class Roulette
 		@player = first
 		# if they lose do this.. @player.wallet.withdraw
 		# if they win do this.. @player.wallet.deposit
-		@roulette = [1..36]
+		@roulette = (1..36).to_a
 		@color = ["red", "black"] 
 		@oddEven = nil
 		@redorblack = nil
@@ -27,6 +27,7 @@ class Roulette
 
 	def roulettegame
 		puts "Welcome to Roulette!"
+		puts "$10 a game"
 		puts "Would you like to: "
 		puts "1) Bet on an even or odd number"
 		puts "2) Bet on a specific number"
@@ -41,7 +42,7 @@ class Roulette
 
 		def specificNumber
 			puts "What number would you like to select (1 - 36)"
-			spec = gets.to_i
+			@spec = gets.to_i
 			colorboi
 		end
 
@@ -56,36 +57,63 @@ class Roulette
 				else
 					puts "Invalid input"
 					oddoreven
-				end
-		binding.pry
+			end
 
-				colorboi
+			colorboi
 		end
 
 		def colorboi
-			"Would you like to bet on a color as well (y/n)"
+			puts "Would you like to bet on a color as well (y/n)"
 			col = gets.strip
 			case col
-				if = "y"
+				when "y"
 					colorboitoo
-				else 
+				when "n"
 					roll
+				else
+					puts "Invalid input"
+					colorboi
 				end
-
 		end
 
 		def colorboitoo
-			
+			puts "What color (red or black)"
+				colr = gets.strip
+			case colr
+			when "red"
+				@redorblack = 'red'
+			when "black"
+				@redorblack = 'black'
+			else
+				puts "Invalid input"
+				colorboitoo
+			end
+			colorbet
+		end
+
+		def colorbet
+			puts "How much would you like to bet on color?"
+			puts "$2-5"
+			colorboibet = gets.to_f
+			roll
+		end
 			
 
 		def roll
 			puts "Table spinning..." #time this so that it goes right into
 			#dont sample.rand roulettegame(that's a method!), instead sample.rand roulette, the odd/even, and the color
-				@roulette.sample.rand 
-				@color.sample.rand 
+				num_result = @roulette.sample
+				col_result = @color.sample
+
+
+
+				puts "It's a #{col_result} #{num_result}!" 
+
+
 
 		end
 
 end
 
-Roulette.new
+player = Player.new
+Roulette.new(player)
