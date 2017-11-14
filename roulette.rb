@@ -65,8 +65,8 @@ class Roulette
 
 		def colorboi
 			puts "Would you like to bet on a color as well (y/n)"
-			col = gets.strip
-			case col
+			@col = gets.strip
+			case @col
 				when "y"
 					colorboitoo
 				when "n"
