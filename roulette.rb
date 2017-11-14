@@ -105,15 +105,19 @@ class Roulette
 				num_result = @roulette.sample
 				col_result = @color.sample
 
-
-
 				puts "It's a #{col_result} #{num_result}!" 
 
+				#colorboibet + $10
+				#either take away or add, depending on bet
+				#compare the randomized answer to the bet placed
+				#add or take amount from wallet in main bet
+				#add or take amount from wallet in color bet (if they placed a bet there)
+				
 
 
 		end
 
 end
 
-player = Player.new
-Roulette.new(player)
+#player = Player.new
+#Roulette.new(player)
