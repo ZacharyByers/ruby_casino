@@ -114,18 +114,18 @@ class HighLow
         when 2
           if cards.last.rank[:rank] < cards[cards.length - 2].rank[:rank]
             `say hooray`
-            puts "You win!"
+            puts "You win!".green
             payout_multiplier = get_multiplier(cards[cards.length - 2].rank[:rank], 2)
             @bet += (@bet * payout_multiplier)
             win = true
           else
-            `say dagnabbit`.green
+            `say dagnabbit`
             puts "Too bad.".red
           end
       end
 
       if cards.last.rank[:rank] == cards[cards.length - 2].rank[:rank]
-        puts "Even money."
+        puts "Even money.".yellow
         win = true
       end
 
@@ -140,11 +140,11 @@ class HighLow
             redo
           when 2
             @player.wallet.deposit(@bet)
-            puts "You won $#{@bet}!"
+            puts "You won $#{@bet}!".green
             initial_menu
           when 3
             @player.wallet.deposit(@bet)
-            puts "You won $#{@bet}!"
+            puts "You won $#{@bet}!".green
             puts "Come again!"
         end
         break
