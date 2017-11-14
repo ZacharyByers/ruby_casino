@@ -110,7 +110,3 @@ class Craps
       end
     end
   end
-
-#player = Player.new
-
-#Craps.new(player)
