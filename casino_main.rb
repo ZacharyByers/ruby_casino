@@ -32,7 +32,7 @@ class Casino
       when 1
         Craps.new(@player)
       when 2
-        Slots.new(@player)
+        Roulette.new(@player)
       when 3
         Blackjack.new(@player)
       when 4

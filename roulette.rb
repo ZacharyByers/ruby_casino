@@ -13,14 +13,14 @@ class Roulette
 	# display randomized number/color
 	# either add or take away from wallet amount depending on the bet
 
-	
+
 	def initialize(first)
 		@player = first
 		# if they lose do this.. @player.wallet.withdraw
 		# if they win do this.. @player.wallet.deposit
 		@bet = 10.0
 		@roulette = (1..36).to_a
-		@color = ["red", "black"] 
+		@color = ["red", "black"]
 		@oddEven = nil
 		@redorblack = nil
 		roulettegame
@@ -98,7 +98,7 @@ class Roulette
 			@colorboibet = gets.to_f
 			roll
 		end
-			
+
 
 		def roll
 			puts "Table spinning..." #time this so that it goes right into
@@ -106,7 +106,7 @@ class Roulette
 				num_result = @roulette.sample
 				col_result = @color.sample
 
-				puts "It's a #{col_result} #{num_result}!" 
+				puts "It's a #{col_result} #{num_result}!"
 
 				#colorboibet + $10
 				#either take away or add, depending on bet
@@ -115,13 +115,14 @@ class Roulette
 				#add or take amount from wallet in color bet (if they placed a bet there)
 				if num_result == @spec
 					'say congradimication you won'
-					@player.wallet.deposit(@bet) 
-				else 
+					@player.wallet.deposit(@bet)
+				else
+					`say dagnabbit`
 					puts "Oopsie poopsies, you silly loser!"
 					@player.wallet.withdraw(@bet)
 
 				  #win
-				#elsif 
+				#elsif
 				  # check if num is even or odd check user input for even or odd see if they match
 				#elsif
 				   #col_result && @redorblack
@@ -130,7 +131,8 @@ class Roulette
 					"!!!You got something right!!!"
 					@player.wallet.deposit(@colorboibet)
 				else
-					puts "Uh oh spagghetti-os, couldn't even get the color!"
+					`say Uh oh spagghetti-os`
+					puts "couldn't even get the color!"
 					@player.wallet.withdraw(@colorboibet)
 				end
 
